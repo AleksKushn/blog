@@ -9,7 +9,7 @@ gem 'pg'
 # gem 'jbuilder', '~> 2.0'
 # Use Puma as the app server
 gem 'puma'
-
+gem 'pg_search'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
