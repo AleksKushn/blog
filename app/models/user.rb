@@ -34,5 +34,4 @@ class User < ApplicationRecord
       break token unless User.exists?(api_key: token)
     end
   end
-
 end

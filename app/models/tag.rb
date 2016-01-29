@@ -6,7 +6,7 @@ class Tag < ApplicationRecord
 
   multisearchable against: :name
 
-  after_save :reindex
+  #after_save :reindex
 
   def as_json(options = {})
     {

@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
 
   multisearchable against: :content
 
-  after_save :reindex
+  #after_save :reindex
 
   def as_json(options = {})
     {

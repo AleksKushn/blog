@@ -1,16 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_with_token!, only: [:update, :destroy]
 
   # GET /users
   def index
     @users = User.all
 
-    render :json => @users.to_json()
+    render :json => @users.to_json(), status: 200
   end
 
   # GET /users/1
   def show
-    render json: @user.to_json()
+    render json: @user.to_json(), status: 200
   end
 
   # POST /users
@@ -26,16 +27,18 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    user = current_user
+    if user.update(user_params)
+      render :json => user.to_json(), status: 200
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render  :json => { errors: [$!.to_s] }.to_json, :status => 422
     end
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    current_user.destroy
+    head 204
   end
 
   private
@@ -46,6 +49,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password_digest, :api_key)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end

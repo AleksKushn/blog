@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   include PgSearch
 
-  has_many :comments, :foreign_key => 'post_id'
-  has_many :tags, :foreign_key => 'post_id'
+  has_many :comments, :foreign_key => 'post_id', dependent: :destroy
+  has_many :tags, :foreign_key => 'post_id',dependent: :destroy
   belongs_to :author, class_name: User
 
   validates :author, presence: true
@@ -21,7 +21,7 @@ class Post < ApplicationRecord
 
   multisearchable against: [:title, :content]
 
-  after_save :reindex
+  #after_save :reindex
 
 
   def as_json(options = {})
