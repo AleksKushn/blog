@@ -1,6 +1,17 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  include CanCan::ControllerAdditions
   before_action :authenticate
+
+
+  rescue_from CanCan::AccessDenied do |e|
+    render :json => {errors: [$!.to_s]}.to_json, status: :forbidden
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render :json => {errors: [$!.to_s]}.to_json, :status => 422
+  end
+
 
   def user_signed_in?
     current_user.present?

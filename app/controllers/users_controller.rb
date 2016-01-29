@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
   before_action :authenticate_with_token!, only: [:update, :destroy]
-
+  load_and_authorize_resource
   # GET /users
   def index
     @users = User.all

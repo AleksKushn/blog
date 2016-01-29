@@ -49,6 +49,7 @@ GEM
     bcrypt (3.1.10)
     builder (3.2.2)
     byebug (8.2.1)
+    cancancan (1.13.1)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
@@ -164,6 +165,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
+  cancancan (~> 1.10)
   faker (~> 1.6, >= 1.6.1)
   pg
   pg_search

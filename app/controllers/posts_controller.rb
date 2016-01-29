@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /posts
   def index
     @posts = Post.includes(:author)

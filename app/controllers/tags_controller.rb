@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /tags
   def index
     @tags = Tag.all
